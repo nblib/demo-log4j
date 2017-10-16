@@ -1,0 +1,6 @@
+2017-08-23 16:19:20 [main] INFO  demo.hewe.first.First -
+                first info
+2017-08-23 16:19:20 [main] WARN  demo.hewe.first.First -
+                first warn
+2017-08-23 16:19:20 [main] ERROR demo.hewe.first.First -
+                first error
