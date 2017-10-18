@@ -1,5 +1,6 @@
 package demo.hewe;
 
+import demo.gewe.Demo;
 import org.apache.log4j.Logger;
 
 /**
@@ -10,7 +11,8 @@ public class App {
 
     public static void main(String[] args) {
        test();
-
+        Demo demo = new Demo();
+        demo.out();
     }
     public static void test(){
         log.warn("字符串为空");
