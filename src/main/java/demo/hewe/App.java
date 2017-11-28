@@ -11,8 +11,8 @@ public class App {
 
     public static void main(String[] args) {
         test();
-        Demo demo = new Demo();
-        demo.out();
+//        Demo demo = new Demo();
+//        demo.out();
     }
 
     public static void test() {
