@@ -9,9 +9,9 @@ Configuration:
         Pattern: "%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"
     Socket:
       name: SOCKETOUT
-      host: 192.168.233.138
-      port: 4567
-      protocol: tcp
+      host: 10.169.3.219
+      port: 3499
+      protocol: udp
       PatternLayout:
         Pattern: "%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"
   Loggers:
