@@ -18,4 +18,4 @@ Configuration:
     Root:
       level: trace
       AppenderRef:
-        ref: SOCKETOUT
+        ref: STDOUT

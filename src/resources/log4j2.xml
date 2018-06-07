@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration debug="off" monitorInterval="1800">
+    <Properties>
+        <!--<Property name="log-path">/data/logs/storm_consumer_kafka</Property>-->
+        <Property name="log-path">/Users/hewe/IdeaProjects/demo-log4j/logs</Property>
+    </Properties>
+
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+
+        <RollingFile name="app_debug" fileName="${log-path}/debug.log"
+                     filePattern="${log-path}/debug.%d{yyyy-MM-dd}.log" append="true">
+            <Filters>
+                <ThresholdFilter level="info" onMatch="DENY" onMismatch="NEUTRAL"/>
+                <ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="NEUTRAL"/>
+            </Filters>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </RollingFile>
+        <RollingFile name="app_info" fileName="${log-path}/info.log" filePattern="${log-path}/info.%d{yyyy-MM-dd}.log"
+                     append="true">
+            <Filters>
+                <ThresholdFilter level="warn" onMatch="DENY" onMismatch="NEUTRAL"/>
+                <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </RollingFile>
+        <RollingFile name="app_error" fileName="${log-path}/error.log"
+                     filePattern="${log-path}/error.%d{yyyy-MM-dd HH:mm:ss}.log" append="true">
+            <Filters>
+                <ThresholdFilter level="warn" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+            <CronTriggeringPolicy schedule="* * * * * ?"/>
+            <DefaultRolloverStrategy>
+                <Delete basePath="${log-path}" maxDepth="2">
+                    <IfFileName glob="*/*.log"/>
+                    <IfLastModified age="5s"/>
+                </Delete>
+            </DefaultRolloverStrategy>
+
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Root level="trace">
+            <AppenderRef ref="Console"/>
+        </Root>
+        <Logger name="demo.hewe" level="trace" additivity="false">
+            <appender-ref ref="Console"/>
+            <appender-ref ref="app_debug"/>
+            <appender-ref ref="app_info"/>
+            <appender-ref ref="app_error"/>
+        </Logger>
+    </Loggers>
+</configuration>
